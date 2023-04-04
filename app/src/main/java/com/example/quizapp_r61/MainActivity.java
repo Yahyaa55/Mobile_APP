@@ -7,23 +7,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnlogin;
-    EditText edEmail;
-
+    EditText etLogin,etPassword;
+    Button blogin;
+    TextView tvRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        edEmail=findViewById(R.id.etLogin);
-        btnlogin = findViewById(R.id.bLogin);
-        btnlogin.setOnClickListener(new View.OnClickListener() {
+        etLogin=(EditText) findViewById(R.id.etLogin);
+        etPassword=(EditText) findViewById(R.id.etPassword);
+        blogin =(Button) findViewById(R.id.bLogin);
+        tvRegister = (TextView) findViewById(R.id.tvRegister);
+        blogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent itLogin = new Intent(MainActivity.this,Quiz1.class);
-                itLogin.putExtra("Email",edEmail.getText());
-                startActivity(itLogin);
+                if (etLogin.getText().toString().equals("toto") && etPassword.getText().toString().equals("123")){
+                    startActivity(new Intent(MainActivity.this, Quiz1.class));
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Login or password incorrect !",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Register.class));
             }
         });
 
